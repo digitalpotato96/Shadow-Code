@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.MainCommands;
 import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
@@ -43,7 +44,8 @@ public class RobotContainer
 
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
-  private final MainCommands m_Commands = new MainCommands();
+  private final FeederSubsystem m_feeder = new FeederSubsystem();
+  private final MainCommands m_Commands = new MainCommands(m_shooter, m_climber, m_feeder);
   
 
   // The robot's subsystems and commands are defined here...

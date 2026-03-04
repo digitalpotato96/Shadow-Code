@@ -15,6 +15,17 @@ public class MainCommands {
     private ClimberSubsystem Climber;
     private FeederSubsystem Feeder;
 
+    public MainCommands(
+        ShooterSubsystem Shooter, 
+        ClimberSubsystem Climber,
+        FeederSubsystem Feeder){
+            this.Shooter = Shooter;
+            this.Climber = Climber;
+            this.Feeder = Feeder;
+
+        }
+    
+
 
 public Command shoot(){ 
     return Shooter.setVelocity(RPM.of(5000)).withTimeout(1)
