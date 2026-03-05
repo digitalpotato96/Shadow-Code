@@ -28,13 +28,13 @@ public class MainCommands {
 
 
 public Command shoot(){ 
-    return Shooter.setVelocity(RPM.of(5000)).withTimeout(1)
-        .andThen(Shooter.setVelocity(RPM.of(5000))
-        .alongWith(Feeder.set(1)));
+    return Shooter.set(-1)
+        //.andThen(Shooter.setVelocity(RPM.of(5000))
+        .alongWith(Feeder.set(-1));
     }
 
 public Command suck(){
-    return Shooter.setVelocity(RPM.of(5000))
-    .alongWith(Feeder.set(-1));
+    return Shooter.setVelocity(RPM.of(-5000))
+    .alongWith(Feeder.set(1));
 }
 }

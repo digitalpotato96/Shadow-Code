@@ -15,11 +15,13 @@ import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.MainCommands;
@@ -39,8 +41,8 @@ public class RobotContainer
 {
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  final         CommandPS5Controller driverController = new CommandPS5Controller(0);
-  private final CommandPS5Controller m_operatorController = new CommandPS5Controller(OperatorConstants.OPERATOR_CONTROLLER_PORT);
+  final         CommandXboxController driverController = new CommandXboxController(0);
+  private final CommandXboxController m_operatorController = new CommandXboxController(OperatorConstants.OPERATOR_CONTROLLER_PORT);
 
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
@@ -117,9 +119,9 @@ public class RobotContainer
    */
   private void configureBindings()
   {
-    m_operatorController.L1().whileTrue(m_Commands.shoot());
-    m_operatorController.L2().whileTrue(m_Commands.suck());
-    
+    m_operatorController.rightTrigger().whileTrue(m_Commands.shoot());
+    m_operatorController.leftTrigger().whileTrue(m_Commands.suck());
+
     Command driveFieldOrientedAnglularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
     Command driveFieldOrientedDirectAngleKeyboard      = drivebase.driveFieldOriented(driveDirectAngleKeyboard);
     /**
@@ -137,7 +139,7 @@ public class RobotContainer
 
     if (Robot.isSimulation())
     {
-      driverController.create().onTrue(Commands.runOnce(() -> drivebase.resetOdometry(new Pose2d(3, 3, new Rotation2d()))));
+      driverController.start().onTrue(Commands.runOnce(() -> drivebase.resetOdometry(new Pose2d(3, 3, new Rotation2d()))));
       driverController.button(1).whileTrue(drivebase.sysIdDriveMotorCommand());
 
     }
@@ -145,24 +147,24 @@ public class RobotContainer
     {
       drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocity); // Overrides drive command above!
 
-      driverController.square().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
-      driverController.triangle().whileTrue(drivebase.driveToDistanceCommand(1.0, 0.2));
-      driverController.create().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-      driverController.options().whileTrue(drivebase.centerModulesCommand());
-      driverController.L1().onTrue(Commands.none());
-      driverController.R1().onTrue(Commands.none());
+      driverController.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
+      driverController.y().whileTrue(drivebase.driveToDistanceCommand(1.0, 0.2));
+      driverController.start().onTrue((Commands.runOnce(drivebase::zeroGyro)));
+      driverController.start().whileTrue(drivebase.centerModulesCommand());
+      driverController.leftBumper().onTrue(Commands.none());
+      driverController.rightBumper().onTrue(Commands.none());
     } else
     {
-      driverController.cross().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-      driverController.square().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
-      driverController.circle().whileTrue(
+      driverController.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
+      driverController.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
+      driverController.b().whileTrue(
           drivebase.driveToPose(
               new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
                               );
-      driverController.create().whileTrue(Commands.none());
-      driverController.options().whileTrue(Commands.none());
-      driverController.L1().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
-      driverController.R1().onTrue(Commands.none());
+      driverController.start().whileTrue(Commands.none());
+      driverController.start().whileTrue(Commands.none());
+      driverController.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
+      driverController.rightBumper().onTrue(Commands.none());
     }
 
   }
