@@ -28,13 +28,22 @@ public class MainCommands {
 
 
 public Command shoot(){ 
-    return Shooter.set(-1)
-        //.andThen(Shooter.setVelocity(RPM.of(5000))
+    return Shooter.setVelocity(RPM.of(-800))
         .alongWith(Feeder.set(-1));
     }
 
 public Command suck(){
-    return Shooter.setVelocity(RPM.of(-5000))
+    return Shooter.setVelocity(RPM.of(800))
     .alongWith(Feeder.set(1));
-}
+    }
+
+public Command Climber_Forward(){
+    return Climber.set(-0.25); 
+    }
+
+    
+public Command Climber_Back(){
+    return Climber.set(0.25); 
+    }
+
 }

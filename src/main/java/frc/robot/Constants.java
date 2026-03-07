@@ -39,6 +39,28 @@ public final class Constants
     public static final double WHEEL_LOCK_TIME = 10; // seconds
   }
 
+  public static final class ShooterConstants
+  {
+
+    public static final int LEADER_SHOOTER_MOTOR_ID = 13;
+    public static final int FOLLOWER_SHOOTER_MOTOR_ID = 12; 
+  
+  }
+
+  public static final class ClimberConstants
+  {
+
+    public static final int CLIMBER_MOTOR_ID = 9;
+
+  }
+
+  public static final class FeederConstants
+  {
+
+  public static final int FEEDER_MOTOR_ID = 4;
+  
+  }
+
   public static class OperatorConstants
   {
     public static final int OPERATOR_CONTROLLER_PORT = 1;
@@ -49,7 +71,7 @@ public final class Constants
     public static final double TURN_CONSTANT    = 6;
   }
 
-  public static final class RollerConstants {
+  /*public static final class RollerConstants {
     public static final int ROLLER_MOTOR_ID = 12;
     public static final int ROLLER_MOTOR_CURRENT_LIMIT = 60;
     public static final double ROLLER_MOTOR_VOLTAGE_COMP = 10;
@@ -58,7 +80,7 @@ public final class Constants
     public static final double ROLLER_Coral_OUT = -0.15;
     public static final double CoralBack = 0.12;
     public static final int BEAMBREAK_DIO = 9;
-  }
+  }*/
 
 }
 

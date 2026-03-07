@@ -24,6 +24,8 @@ import yams.motorcontrollers.SmartMotorControllerConfig.MotorMode;
 import yams.motorcontrollers.SmartMotorControllerConfig.TelemetryVerbosity;
 import yams.motorcontrollers.local.SparkWrapper;
 
+import static frc.robot.Constants.ClimberConstants.*;
+
 public class ClimberSubsystem extends SubsystemBase {
     // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
@@ -48,7 +50,7 @@ public class ClimberSubsystem extends SubsystemBase {
   .withStatorCurrentLimit(Amps.of(40));
 
   // Vendor motor controller object
-  private SparkMax Climber = new SparkMax(9, MotorType.kBrushless);
+  private SparkMax Climber = new SparkMax(CLIMBER_MOTOR_ID, MotorType.kBrushless);
 
   // Create our SmartMotorController from our Spark and config with the NEO.
   private SmartMotorController sparkSmartMotorController = new SparkWrapper(Climber, DCMotor.getNEO(1), smcConfig);

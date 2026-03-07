@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
@@ -121,6 +122,8 @@ public class RobotContainer
   {
     m_operatorController.rightTrigger().whileTrue(m_Commands.shoot());
     m_operatorController.leftTrigger().whileTrue(m_Commands.suck());
+    m_operatorController.rightBumper().whileTrue(m_Commands.Climber_Forward());
+    m_operatorController.leftBumper().whileTrue(m_Commands.Climber_Back());
 
     Command driveFieldOrientedAnglularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
     Command driveFieldOrientedDirectAngleKeyboard      = drivebase.driveFieldOriented(driveDirectAngleKeyboard);

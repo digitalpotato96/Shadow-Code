@@ -5,12 +5,12 @@ import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.RollerConstants;
+import static frc.robot.Constants.FeederConstants.*;
 
 public class FeederSubsystem extends SubsystemBase
 {
   
-  private final SparkMax Feedermotor = new SparkMax(4, MotorType.kBrushless);
+  private final SparkMax Feedermotor = new SparkMax(FEEDER_MOTOR_ID, MotorType.kBrushless);
  
 
   public FeederSubsystem()

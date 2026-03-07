@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import yams.gearing.GearBox;
 import yams.gearing.MechanismGearing;
+import yams.gearing.Sprocket;
 import yams.mechanisms.config.FlyWheelConfig;
 import yams.mechanisms.velocity.FlyWheel;
 import yams.motorcontrollers.SmartMotorController;
@@ -30,11 +31,13 @@ import yams.motorcontrollers.SmartMotorControllerConfig.MotorMode;
 import yams.motorcontrollers.SmartMotorControllerConfig.TelemetryVerbosity;
 import yams.motorcontrollers.local.SparkWrapper;
 
+import static frc.robot.Constants.ShooterConstants.*;
+
 public class ShooterSubsystem extends SubsystemBase {
 
   // Vendor motor controller object
-  private SparkFlex Leader_motor = new SparkFlex(13, MotorType.kBrushless);
-  private SparkFlex Follower = new SparkFlex(12, MotorType.kBrushless);
+  private SparkFlex Leader_motor = new SparkFlex(LEADER_SHOOTER_MOTOR_ID, MotorType.kBrushless);
+  private SparkFlex Follower = new SparkFlex(FOLLOWER_SHOOTER_MOTOR_ID, MotorType.kBrushless);
   
   private SmartMotorControllerConfig smcConfig = new SmartMotorControllerConfig(this)
   .withControlMode(ControlMode.CLOSED_LOOP)
@@ -50,7 +53,7 @@ public class ShooterSubsystem extends SubsystemBase {
   // Gearing from the motor rotor to final shaft.
   // In this example GearBox.fromReductionStages(3,4) is the same as GearBox.fromStages("3:1","4:1") which corresponds to the gearbox attached to your motor.
   // You could also use .withGearing(12) which does the same thing.
-  .withGearing(new MechanismGearing(GearBox.fromReductionStages(3, 4)))
+  .withGearing(new MechanismGearing(GearBox.fromReductionStages(1),Sprocket.fromStages("40:60")))
   // Motor properties to prevent over currenting.
   .withMotorInverted(false)
   .withIdleMode(MotorMode.COAST)
