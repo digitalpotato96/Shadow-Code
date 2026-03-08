@@ -10,7 +10,6 @@ import static edu.wpi.first.units.Units.Pounds;
 import static edu.wpi.first.units.Units.RPM;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-// Double check the SparkFlex change - Aiden
 import com.revrobotics.spark.SparkFlex;
 
 import edu.wpi.first.math.Pair;

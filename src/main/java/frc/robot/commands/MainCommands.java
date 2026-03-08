@@ -28,12 +28,12 @@ public class MainCommands {
 
 
 public Command shoot(){ 
-    return Shooter.setVelocity(RPM.of(-800))
+    return Shooter.set(-0.50).withTimeout(0.5)                           //Velocity(RPM.of(-1800)).withTimeout(0.5)
         .alongWith(Feeder.set(-1));
     }
 
 public Command suck(){
-    return Shooter.setVelocity(RPM.of(800))
+    return Shooter.set(0.50).withTimeout(0.5)                           //Velocity(RPM.of(1800))
     .alongWith(Feeder.set(1));
     }
 
